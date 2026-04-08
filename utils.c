@@ -1,3 +1,4 @@
+#include "philo.h"
 
 int ft_atoi(const char *str)
 {
@@ -9,7 +10,7 @@ int ft_atoi(const char *str)
     sign = 1;
     result = 0;
 
-    while((str[i] >= 13 && str[i] <= 9) || str[i] == ' ')
+    while((str[i] >= 8 && str[i] <= 13) || str[i] == ' ')
         i++;
     if(str[i] == '-' || str[i] == '+')
     {
@@ -32,7 +33,7 @@ long    get_time(void)
     struct timeval time;
 
     gettimeofday(&time, NULL);
-    return((long)time.tv_sec * 1000 + (long)time.tv_usec / 1000)
+    return((long)time.tv_sec * 1000 + (long)time.tv_usec / 1000);
 
 }
 

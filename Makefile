@@ -1,9 +1,9 @@
 NAME = philo
 
-CC = CC
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = philo.c utils.c
+SRCS = philo.c utils.c deneme.c parse_args.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
