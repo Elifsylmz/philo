@@ -1,5 +1,11 @@
 #include "philo.h"
 
+static void destroy_forks(t_data *data, int count)
+{
+    while (count-- > 0)
+        pthread_mutex_destroy(&data->forks[count]);
+    free(data->forks);
+}
 
 int init_forks(t_data *data)
 {
@@ -13,13 +19,23 @@ int init_forks(t_data *data)
     while(i < data->nb_philos)
     {
         if(pthread_mutex_init(&data->forks[i], NULL) != 0)
+        {
+            destroy_forks(data, i); // init olanları temizler
             return (0);
+        }
         i++;
     }
     if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
+    {
+        destroy_forks(data, data->nb_philos);
         return (0);
+    }
     if (pthread_mutex_init(&data->state_mutex, NULL) != 0)
+    {
+        destroy_forks(data, data->nb_philos);
+        pthread_mutex_destroy(&data->print_mutex);
         return (0);
+    }
 
     return (1);
 
@@ -30,15 +46,24 @@ int init_philos(t_philo *philos, t_data *data)
     int i;
 
     i = 0;
-    while(i < data->nb_philos)
+    while (i < data->nb_philos)
     {
         philos[i].id = i + 1;
         philos[i].eat_count = 0;
-        philos[i].last_meal = data->start_time; // 0 olursa "epoch 1970" o yüzden düzelt
+        philos[i].last_meal = data->start_time;
         philos[i].data = data;
 
-        philos[i].left_fork = &data->forks[i];
-        philos[i].right_fork = &data->forks[(i + 1) % data->nb_philos];
+        // burası deadlock önlemek için ama usleep de kullanılabilir ona da bak
+        if (i % 2 == 0)
+        {
+            philos[i].left_fork = &data->forks[(i + 1) % data->nb_philos];
+            philos[i].right_fork = &data->forks[i];
+        }
+        else
+        {
+            philos[i].left_fork = &data->forks[i];
+            philos[i].right_fork = &data->forks[(i + 1) % data->nb_philos];
+        }
 
         i++;
     }

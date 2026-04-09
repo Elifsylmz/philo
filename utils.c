@@ -4,7 +4,7 @@ int ft_atoi(const char *str)
 {
     int i;
     int sign;
-    int result;
+    long result;
 
     i = 0;
     sign = 1;
@@ -25,7 +25,7 @@ int ft_atoi(const char *str)
             return (0);
         i++;
     }
-    return (result * sign);
+    return ((int)result * sign);
 }
 
 long    get_time(void)

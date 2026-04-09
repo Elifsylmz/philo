@@ -38,6 +38,8 @@ int     ft_atoi(const char *str);
 long    get_time(void);
 void    ft_usleep(long ms);
 
+int     ft_is_nb(const char *str);
+int     check_args(int argc, char **argv);
 int     parse_args(t_data *data, int argc, char **argv);
 
 int     init_forks(t_data *data);
