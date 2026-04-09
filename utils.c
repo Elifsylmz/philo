@@ -37,4 +37,11 @@ long    get_time(void)
 
 }
 
-//sleep
+void    ft_usleep(long ms)
+{
+    long start;
+
+    start = get_time();
+    while ((get_time() - start) < ms)
+        usleep(100);
+}

@@ -18,11 +18,12 @@ int parse_args(t_data *data, int argc, char **argv)
     else
         data->must_eat = -1;
 
-    if (data->nb_philos < 1 || data->time_to_die < 1
-        || data->time_to_eat < 1 || data->time_to_sleep < 1)
+    if(data->nb_philos < 1 || data->time_to_die < 1
+        || data->time_to_eat < 1 || data->time_to_sleep < 1
+        || (argc == 6 && data->must_eat < 1))
     {
         printf("Error: all arguments must be positive integers\n");
-        return (0);
+        return(0);
     }
 
     return (1);

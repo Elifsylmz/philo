@@ -1,13 +1,12 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <pthread.h>
-#include <sys/time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <stddef.h>
+# include <pthread.h>
+# include <sys/time.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
 
 typedef struct s_data
 {
@@ -15,7 +14,7 @@ typedef struct s_data
     long            time_to_die;
     long            time_to_eat;
     long            time_to_sleep;
-    int             must_eat;       // bu verilmezse -1
+    int             must_eat;
     long            start_time;
     int             dead;
     int             all_ate;
@@ -35,9 +34,10 @@ typedef struct s_philo
     t_data          *data;
 }   t_philo;
 
-int ft_atoi(const char *str);
+int     ft_atoi(const char *str);
 long    get_time(void);
+void    ft_usleep(long ms);
 
-int parse_args(t_data *data, int argc, char **argv);
+int     parse_args(t_data *data, int argc, char **argv);
 
 #endif
