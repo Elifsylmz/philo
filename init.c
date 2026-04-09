@@ -1,0 +1,64 @@
+#include "philo.h"
+
+
+int init_forks(t_data *data)
+{
+    int i;
+
+    data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philos);
+    if(!data->forks)
+        return(0);
+
+    i = 0;
+    while(i < data->nb_philos)
+    {
+        if(pthread_mutex_init(&data->forks[i], NULL) != 0)
+            return (0);
+        i++;
+    }
+    if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
+        return (0);
+    if (pthread_mutex_init(&data->state_mutex, NULL) != 0)
+        return (0);
+
+    return (1);
+
+}
+
+int init_philos(t_philo *philos, t_data *data)
+{
+    int i;
+
+    i = 0;
+    while(i < data->nb_philos)
+    {
+        philos[i].id = i + 1;
+        philos[i].eat_count = 0;
+        philos[i].last_meal = data->start_time; // 0 olursa "epoch 1970" o yüzden düzelt
+        philos[i].data = data;
+
+        philos[i].left_fork = &data->forks[i];
+        philos[i].right_fork = &data->forks[(i + 1) % data->nb_philos];
+
+        i++;
+    }
+    return (1);
+}
+
+int init_all(t_philo **philos, t_data *data)
+{
+    *philos = malloc(sizeof(t_philo) * data->nb_philos);
+    if(!(*philos))
+        return (0);
+    if(!init_forks(data))
+        return(0);
+
+    // last_meal'in değeri kullanabilmesi için start_time'ı init_philos'tan önce ayarla
+    data->start_time = get_time();
+    data->dead = 0;
+    data->all_ate = 0;
+
+    if(!init_philos(*philos, data))
+        return (0);
+    return (1);
+}

@@ -40,4 +40,8 @@ void    ft_usleep(long ms);
 
 int     parse_args(t_data *data, int argc, char **argv);
 
+int     init_forks(t_data *data);
+int     init_philos(t_philo *philos, t_data *data);
+int     init_all(t_philo **philos, t_data *data);
+
 #endif
