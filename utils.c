@@ -20,9 +20,10 @@ int ft_atoi(const char *str)
     }
     while(str[i] >= '0' && str[i] <= '9')
     {
+        if (result > (2147483647 / 10) || 
+            (result == 2147483647 / 10 && (str[i] - '0') > 7))
+            return (-1);
         result = (result * 10) + (str[i] - '0');
-        if(result > 2147483647)
-            return (0);
         i++;
     }
     return ((int)result * sign);

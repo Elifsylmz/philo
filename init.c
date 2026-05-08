@@ -1,6 +1,6 @@
 #include "philo.h"
 
-static void destroy_forks(t_data *data, int count)
+void destroy_forks(t_data *data, int count)
 {
     while (count-- > 0)
         pthread_mutex_destroy(&data->forks[count]);
@@ -76,7 +76,10 @@ int init_all(t_philo **philos, t_data *data)
     if(!(*philos))
         return (0);
     if(!init_forks(data))
+    {
+        free(*philos);
         return(0);
+    }
 
     // last_meal'in değeri kullanabilmesi için start_time'ı init_philos'tan önce ayarla
     data->start_time = get_time();
@@ -84,6 +87,10 @@ int init_all(t_philo **philos, t_data *data)
     data->all_ate = 0;
 
     if(!init_philos(*philos, data))
+    {
+        destroy_forks(data, data->nb_philos);
+        free(*philos);
         return (0);
+    }
     return (1);
 }

@@ -6,9 +6,6 @@ int ft_is_nb(const char *str)
 
     if (!str || str[0] == '\0')
         return (0);
-    // negatif sayılar için başta - kontrol edebiliriz
-    if (str[0] == '+' || str[0] == '-')
-        i++;
     while (str[i])
     {
         if (str[i] < '0' || str[i] > '9')
