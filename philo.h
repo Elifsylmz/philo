@@ -47,8 +47,12 @@ int     init_forks(t_data *data);
 int     init_philos(t_philo *philos, t_data *data);
 int     init_all(t_philo **philos, t_data *data);
 
+void    print_status(t_philo *philo, char *status);
+void    philo_eat(t_philo *philo);
 void    *philo_routine(void *arg);
 int     start_threads(t_data *data, t_philo *philos);
 void    join_threads(t_data *data, t_philo *philos);
+
+void    monitor_routine(t_data *data, t_philo *philos);
 
 #endif
