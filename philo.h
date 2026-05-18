@@ -37,6 +37,8 @@ typedef struct s_philo
 int     ft_atoi(const char *str);
 long    get_time(void);
 void    ft_usleep(long ms);
+int     simulation_stopped(t_data *data);
+void    smart_sleep(t_data *data, long ms);
 
 int     ft_is_nb(const char *str);
 int     check_args(int argc, char **argv);
@@ -49,6 +51,7 @@ int     init_all(t_philo **philos, t_data *data);
 
 void    print_status(t_philo *philo, char *status);
 void    philo_eat(t_philo *philo);
+void    philo_think(t_philo *philo);
 void    *philo_routine(void *arg);
 int     start_threads(t_data *data, t_philo *philos);
 void    join_threads(t_data *data, t_philo *philos);
