@@ -18,7 +18,7 @@ void	*philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		smart_sleep(philo->data, philo->data->time_to_eat / 2);
+		sleep_until_stop(philo->data, philo->data->time_to_eat / 2);
 	while (!simulation_stopped(philo->data))
 	{
 		philo_eat(philo);
@@ -38,8 +38,8 @@ int	start_threads(t_data *data, t_philo *philos)
 	while (i < data->nb_philos)
 	{
 		philos[i].last_meal = get_time();
-		if (pthread_create(&philos[i].thread, NULL,
-				philo_routine, &philos[i]) != 0)
+		if (pthread_create(&philos[i].thread, NULL, philo_routine,
+				&philos[i]) != 0)
 		{
 			stop_simulation(data);
 			join_created_threads(philos, i);

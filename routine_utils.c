@@ -17,7 +17,7 @@ void	stop_simulation(t_data *data)
 	pthread_mutex_unlock(&data->state_mutex);
 }
 
-void	smart_sleep(t_data *data, long ms)
+void	sleep_until_stop(t_data *data, long ms)
 {
 	long	start;
 

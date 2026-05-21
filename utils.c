@@ -13,8 +13,7 @@ int	ft_atoi(const char *str)
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (result > 214748364
-			|| (result == 214748364 && (str[i] - '0') > 7))
+		if (result > 214748364 || (result == 214748364 && (str[i] - '0') > 7))
 			return (-1);
 		result = (result * 10) + (str[i] - '0');
 		i++;
@@ -35,7 +34,7 @@ long	get_timestamp(t_data *data)
 	return (get_time() - data->start_time);
 }
 
-void	ft_usleep(long ms)
+void	sleep_ms(long ms)
 {
 	long	start;
 

@@ -51,7 +51,7 @@
 //     printf("\n=== TIMING ===\n");
 //     printf("start_time = %ld\n", data.start_time);
 //     printf("sleeping 200ms...\n");
-//     ft_usleep(200);
+//     sleep_ms(200);
 //     printf("elapsed    = %ldms\n", get_time() - data.start_time);
 
 //     // --- Test 4: fork pointers (circular check) ---
