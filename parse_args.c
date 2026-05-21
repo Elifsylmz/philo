@@ -2,12 +2,19 @@
 
 int ft_is_nb(const char *str)
 {
-    // başında + veya - olabilir o durumu direkt elemiş oluyorsun
-    // revize edilmeli!!!!
-    int i = 0;
+    int i;
 
+    i = 0;
     if (!str || str[0] == '\0')
         return (0);
+    while((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+        i++;
+    while(str[i] == '+')
+    {
+        i++;
+        if(str[i] == '\0')
+            return (0);
+    }
     while (str[i])
     {
         if (str[i] < '0' || str[i] > '9')
@@ -19,10 +26,16 @@ int ft_is_nb(const char *str)
 
 int check_args(int argc, char **argv)
 {
-    int i = 1;
+    int i;
 
+    i = 1;
     while (i < argc)
     {
+        if (argv[i][0] == '-')
+        {
+            printf("Error: arguments must be positive integers\n");
+            return (0);
+        }
         if (!ft_is_nb(argv[i]))
         {
             printf("Error: arguments must be numbers\n");
@@ -54,8 +67,6 @@ int parse_args(t_data *data, int argc, char **argv)
     else
         data->must_eat = -1;
 
-    /* tekrar negatif kontrol yapmışsın gereksiz
-     şimdiye kadar negatif durumu 3. eleyişin saçmalık */
     if(data->nb_philos < 1 || data->time_to_die < 1
         || data->time_to_eat < 1 || data->time_to_sleep < 1
         || (argc == 6 && data->must_eat < 1))
