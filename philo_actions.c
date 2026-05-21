@@ -14,14 +14,16 @@
 
 void	print_status(t_philo *philo, char *status)
 {
+	int	can_print;
+
+	pthread_mutex_lock(&philo->data->print_mutex);
 	pthread_mutex_lock(&philo->data->state_mutex);
-	if (!philo->data->stop)
-	{
-		pthread_mutex_lock(&philo->data->print_mutex);
-		printf("%ld %d %s\n", get_timestamp(philo->data), philo->id, status);
-		pthread_mutex_unlock(&philo->data->print_mutex);
-	}
+	can_print = !philo->data->stop;
 	pthread_mutex_unlock(&philo->data->state_mutex);
+	if (can_print)
+		printf("%ld %d %s\n", get_timestamp(philo->data),
+			philo->id, status);
+	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
 static int	take_forks(t_philo *philo)

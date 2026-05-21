@@ -21,12 +21,10 @@ int	ft_is_nb(const char *str)
 		return (0);
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 		i++;
-	while (str[i] == '+')
-	{
+	if (str[i] == '+')
 		i++;
-		if (str[i] == '\0')
-			return (0);
-	}
+	if (str[i] == '\0')
+		return (0);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
