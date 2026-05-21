@@ -7,11 +7,11 @@ static int	check_death(t_philo *philo)
 	{
 		philo->data->stop = 1;
 		pthread_mutex_unlock(&philo->data->state_mutex);
-		
+
 		pthread_mutex_lock(&philo->data->print_mutex);
-		printf("%ld %d died\n", get_time() - philo->data->start_time, philo->id);
+		printf("%ld %d died\n", get_timestamp(philo->data), philo->id);
 		pthread_mutex_unlock(&philo->data->print_mutex);
-		
+
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->data->state_mutex);
@@ -60,6 +60,6 @@ void	monitor_routine(t_data *data, t_philo *philos)
 		}
 		if (check_all_ate(philos))
 			return ;
-		ft_usleep(1); 
+		ft_usleep(1);
 	}
 }

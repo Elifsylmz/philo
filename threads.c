@@ -37,7 +37,7 @@ int	start_threads(t_data *data, t_philo *philos)
 	data->start_time = get_time();
 	while (i < data->nb_philos)
 	{
-		philos[i].last_meal = data->start_time;
+		philos[i].last_meal = get_time();
 		if (pthread_create(&philos[i].thread, NULL,
 				philo_routine, &philos[i]) != 0)
 		{

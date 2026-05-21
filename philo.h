@@ -17,7 +17,6 @@ typedef struct s_data
     int             must_eat;
     long            start_time;
     int             stop;
-    int             all_ate;
     pthread_mutex_t *forks;
     pthread_mutex_t print_mutex;
     pthread_mutex_t state_mutex;
@@ -36,6 +35,7 @@ typedef struct s_philo
 
 int     ft_atoi(const char *str);
 long    get_time(void);
+long    get_timestamp(t_data *data);
 void    ft_usleep(long ms);
 void	stop_simulation(t_data *data);
 int     simulation_stopped(t_data *data);

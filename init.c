@@ -50,7 +50,6 @@ int init_philos(t_philo *philos, t_data *data)
     {
         philos[i].id = i + 1;
         philos[i].eat_count = 0;
-        philos[i].last_meal = data->start_time;
         philos[i].data = data;
 
         // burası deadlock önlemek için ama usleep de kullanılabilir ona da bak
@@ -80,12 +79,7 @@ int init_all(t_philo **philos, t_data *data)
         free(*philos);
         return(0);
     }
-
-    // last_meal'in değeri kullanabilmesi için start_time'ı init_philos'tan önce ayarla
-    data->start_time = get_time();
     data->stop = 0;
-    data->all_ate = 0;
-
     if(!init_philos(*philos, data))
     {
         destroy_forks(data, data->nb_philos);

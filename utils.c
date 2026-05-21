@@ -22,20 +22,24 @@ int	ft_atoi(const char *str)
 	return ((int)result);
 }
 
-long    get_time(void)
+long	get_time(void)
 {
-    struct timeval time;
+	struct timeval	time;
 
-    gettimeofday(&time, NULL);
-    return((long)time.tv_sec * 1000 + (long)time.tv_usec / 1000);
-                  /* saniye * 1000 */  /* mikrosaniye / 1000 */ /* böylece toplam milisaniyeye ulaştık ve hiçbi şey kaçırmadık */
+	gettimeofday(&time, NULL);
+	return ((long)time.tv_sec * 1000 + (long)time.tv_usec / 1000);
 }
 
-void    ft_usleep(long ms)
+long	get_timestamp(t_data *data)
 {
-    long start;
+	return (get_time() - data->start_time);
+}
 
-    start = get_time();
-    while ((get_time() - start) < ms)
-        usleep(100);
+void	ft_usleep(long ms)
+{
+	long	start;
+
+	start = get_time();
+	while ((get_time() - start) < ms)
+		usleep(100);
 }
