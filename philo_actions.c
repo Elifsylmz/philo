@@ -3,7 +3,7 @@
 void	print_status(t_philo *philo, char *status)
 {
 	pthread_mutex_lock(&philo->data->state_mutex);
-	if (!philo->data->dead)
+	if (!philo->data->stop)
 	{
 		pthread_mutex_lock(&philo->data->print_mutex);
 		printf("%ld %d %s\n", get_time() - philo->data->start_time,

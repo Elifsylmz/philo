@@ -5,9 +5,16 @@ int	simulation_stopped(t_data *data)
 	int	stopped;
 
 	pthread_mutex_lock(&data->state_mutex);
-	stopped = data->dead;
+	stopped = data->stop;
 	pthread_mutex_unlock(&data->state_mutex);
 	return (stopped);
+}
+
+void	stop_simulation(t_data *data)
+{
+	pthread_mutex_lock(&data->state_mutex);
+	data->stop = 1;
+	pthread_mutex_unlock(&data->state_mutex);
 }
 
 void	smart_sleep(t_data *data, long ms)

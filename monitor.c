@@ -5,7 +5,7 @@ static int	check_death(t_philo *philo)
 	pthread_mutex_lock(&philo->data->state_mutex);
 	if (get_time() - philo->last_meal >= philo->data->time_to_die)
 	{
-		philo->data->dead = 1;
+		philo->data->stop = 1;
 		pthread_mutex_unlock(&philo->data->state_mutex);
 		
 		pthread_mutex_lock(&philo->data->print_mutex);
@@ -38,7 +38,7 @@ static int	check_all_ate(t_philo *philos)
 	if (finished_eating == philos[0].data->nb_philos)
 	{
 		pthread_mutex_lock(&philos[0].data->state_mutex);
-		philos[0].data->dead = 1;
+		philos[0].data->stop = 1;
 		pthread_mutex_unlock(&philos[0].data->state_mutex);
 		return (1);
 	}

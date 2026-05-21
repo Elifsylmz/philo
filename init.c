@@ -83,7 +83,7 @@ int init_all(t_philo **philos, t_data *data)
 
     // last_meal'in değeri kullanabilmesi için start_time'ı init_philos'tan önce ayarla
     data->start_time = get_time();
-    data->dead = 0;
+    data->stop = 0;
     data->all_ate = 0;
 
     if(!init_philos(*philos, data))
