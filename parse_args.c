@@ -2,6 +2,8 @@
 
 int ft_is_nb(const char *str)
 {
+    // başında + veya - olabilir o durumu direkt elemiş oluyorsun
+    // revize edilmeli!!!!
     int i = 0;
 
     if (!str || str[0] == '\0')
@@ -52,6 +54,8 @@ int parse_args(t_data *data, int argc, char **argv)
     else
         data->must_eat = -1;
 
+    /* tekrar negatif kontrol yapmışsın gereksiz
+     şimdiye kadar negatif durumu 3. eleyişin saçmalık */
     if(data->nb_philos < 1 || data->time_to_die < 1
         || data->time_to_eat < 1 || data->time_to_sleep < 1
         || (argc == 6 && data->must_eat < 1))

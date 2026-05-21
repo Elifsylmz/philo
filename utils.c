@@ -35,7 +35,7 @@ long    get_time(void)
 
     gettimeofday(&time, NULL);
     return((long)time.tv_sec * 1000 + (long)time.tv_usec / 1000);
-
+                  /* saniye * 1000 */  /* mikrosaniye / 1000 */ /* böylece toplam milisaniyeye ulaştık ve hiçbi şey kaçırmadık */
 }
 
 void    ft_usleep(long ms)
