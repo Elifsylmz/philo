@@ -16,7 +16,6 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
 
@@ -29,6 +28,7 @@ typedef struct s_data
 	int				must_eat;
 	long			start_time;
 	int				stop;
+	int				ready;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	state_mutex;
@@ -52,6 +52,9 @@ void				sleep_ms(long ms);
 void				stop_simulation(t_data *data);
 int					simulation_stopped(t_data *data);
 void				sleep_until_stop(t_data *data, long ms);
+void				wait_start(t_data *data);
+int					simulation_ready(t_data *data);
+
 
 int					ft_is_nb(const char *str);
 int					check_args(int argc, char **argv);

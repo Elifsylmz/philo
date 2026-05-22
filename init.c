@@ -83,6 +83,7 @@ int	init_all(t_philo **philos, t_data *data)
 		return (0);
 	}
 	data->stop = 0;
+	data->ready = 0;
 	if (!init_philos(*philos, data))
 	{
 		destroy_forks(data, data->nb_philos);

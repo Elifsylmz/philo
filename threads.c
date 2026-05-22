@@ -24,11 +24,30 @@ static void	join_created_threads(t_philo *philos, int count)
 	}
 }
 
+static void	set_start_values(t_data *data, t_philo *philos)
+{
+	int		i;
+	long	time;
+
+	i = 0;
+	time = get_time();
+	pthread_mutex_lock(&data->state_mutex);
+	data->start_time = time;
+	while (i < data->nb_philos)
+	{
+		philos[i].last_meal = time;
+		i++;
+	}
+	data->ready = 1;
+	pthread_mutex_unlock(&data->state_mutex);
+}
+
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	wait_start(philo->data);
 	if (philo->id % 2 == 0)
 		sleep_until_stop(philo->data, philo->data->time_to_eat / 2);
 	while (!simulation_stopped(philo->data))
@@ -46,10 +65,8 @@ int	start_threads(t_data *data, t_philo *philos)
 	int	i;
 
 	i = 0;
-	data->start_time = get_time();
 	while (i < data->nb_philos)
 	{
-		philos[i].last_meal = get_time();
 		if (pthread_create(&philos[i].thread, NULL, philo_routine,
 				&philos[i]) != 0)
 		{
@@ -59,6 +76,7 @@ int	start_threads(t_data *data, t_philo *philos)
 		}
 		i++;
 	}
+	set_start_values(data, philos);
 	return (1);
 }
 

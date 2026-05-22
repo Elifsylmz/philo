@@ -12,6 +12,22 @@
 
 #include "philo.h"
 
+int simulation_ready(t_data *data)
+{
+	int ready;
+
+	pthread_mutex_lock(&data->state_mutex);
+	ready = data->ready;
+	pthread_mutex_unlock(&data->state_mutex);
+	return (ready);
+}
+
+void wait_start(t_data *data)
+{
+	while (!simulation_ready(data))
+		usleep(100);
+}
+
 int	simulation_stopped(t_data *data)
 {
 	int	stopped;
