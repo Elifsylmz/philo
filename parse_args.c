@@ -6,7 +6,7 @@
 /*   By: eyilmaz <eyilmaz@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 14:30:17 by eyilmaz           #+#    #+#             */
-/*   Updated: 2026/05/21 14:30:17 by eyilmaz          ###   ########.fr       */
+/*   Updated: 2026/05/23 20:16:29 by eyilmaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	parse_args(t_data *data, int argc, char **argv)
 {
 	if (argc < 5 || argc > 6)
 	{
-		printf("Usage: ./philo nb time_to_die time_to_eat time_to_sleep [must_eat]\n");
+		printf("Usage: ./philo nb time_to_die \
+			time_to_eat time_to_sleep [must_eat]\n");
 		return (0);
 	}
 	if (!check_args(argc, argv))
