@@ -6,15 +6,15 @@
 /*   By: eyilmaz <eyilmaz@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 14:30:25 by eyilmaz           #+#    #+#             */
-/*   Updated: 2026/05/21 14:30:25 by eyilmaz          ###   ########.fr       */
+/*   Updated: 2026/06/02 17:38:42 by eyilmaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int simulation_ready(t_data *data)
+int	simulation_ready(t_data *data)
 {
-	int ready;
+	int	ready;
 
 	pthread_mutex_lock(&data->state_mutex);
 	ready = data->ready;
@@ -22,7 +22,7 @@ int simulation_ready(t_data *data)
 	return (ready);
 }
 
-void wait_start(t_data *data)
+void	wait_start(t_data *data)
 {
 	while (!simulation_ready(data))
 		usleep(100);

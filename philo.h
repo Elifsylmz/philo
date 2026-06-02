@@ -6,7 +6,7 @@
 /*   By: eyilmaz <eyilmaz@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 14:30:22 by eyilmaz           #+#    #+#             */
-/*   Updated: 2026/05/21 14:30:22 by eyilmaz          ###   ########.fr       */
+/*   Updated: 2026/06/02 17:38:08 by eyilmaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int					simulation_stopped(t_data *data);
 void				sleep_until_stop(t_data *data, long ms);
 void				wait_start(t_data *data);
 int					simulation_ready(t_data *data);
-
 
 int					ft_is_nb(const char *str);
 int					check_args(int argc, char **argv);
